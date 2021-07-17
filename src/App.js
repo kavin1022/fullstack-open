@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
+import PersonForm from './PersonForm'
+import Numbers from './Numbers'
+import Filter from './Filter'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App = () => {
+	const [persons, setPersons] = useState([
+		{ name: 'Arto Hellas', number: '040-123456' },
+		{ name: 'Ada Lovelace', number: '39-44-5323523' },
+		{ name: 'Dan Abramov', number: '12-43-234345' },
+		{ name: 'Mary Poppendieck', number: '39-23-6423122' }
+	]);
+	
+	const [filter, setFilter] = useState("");
+	const [filteredList, setFilteredList] = useState([]);
+
+	return (
+		<div>
+			<h2>Phonebook</h2>
+			<Filter persons = {persons} filter = {filter} setFilter = {setFilter} setFilteredList = {setFilteredList}/>
+
+			<h2>add new</h2>
+			<PersonForm persons = {persons} setPersons ={setPersons}/>
+
+			<h2>Numbers</h2>
+			<Numbers persons = {persons} filter = {filter} filteredList = {filteredList}/>
+		</div>
+	)
 }
 
-export default App;
+export default App
